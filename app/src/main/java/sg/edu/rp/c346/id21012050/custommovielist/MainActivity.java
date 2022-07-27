@@ -39,6 +39,26 @@ public class MainActivity extends AppCompatActivity {
         aaMovies = new ArrayAdapter<Movie>(this,
                 android.R.layout.simple_list_item_1, alMovies);
 
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onClick(View view) {
+                String title = etTitle.getText().toString();
+                String genre = etGenre.getText().toString();
+                String year = etYear.getText().toString();
+                DBHelper dbh = new DBHelper(MainActivity.this);
+                long inserted_id = dbh.insertMovie(title, genre, year);
+
+                if (inserted_id != -1){
+                    alMovies.clear();
+                    alMovies.addAll(dbh.getAllMovies());
+                    aaMovies.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, "Insert successful",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
