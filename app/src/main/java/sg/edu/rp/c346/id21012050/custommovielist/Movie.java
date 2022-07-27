@@ -4,16 +4,22 @@ import java.io.Serializable;
 
 public class Movie implements Serializable {
 
+    private int id;
     private String title;
     private String genre;
     private int year;
     private String rating;
 
-    public Movie(String title, String genre, int year, String rating) {
+    public Movie(int id, String title, String genre, int year, String rating) {
+        this.id = id;
         this.title = title;
         this.genre = genre;
         this.year = year;
         this.rating = rating;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -30,6 +36,10 @@ public class Movie implements Serializable {
 
     public String getRating() {
         return rating;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {

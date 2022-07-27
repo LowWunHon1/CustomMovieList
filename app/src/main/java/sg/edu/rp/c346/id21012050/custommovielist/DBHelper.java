@@ -14,6 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "simplemovies.db";
     private static final int DATABASE_VERSION = 2;
     private static final String TABLE_MOVIES = "movies";
+    private static final String COLUMN_ID = "id";
     private static final String COLUMN_TITLE = "title";
     private static final String COLUMN_GENRE = "genre";
     private static final String COLUMN_YEAR = "year";
@@ -26,6 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createNoteTableSql = "CREATE TABLE " + TABLE_MOVIES + "("
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_TITLE + " TEXT,"
                 + COLUMN_GENRE + " TEXT,"
                 + COLUMN_YEAR + " INTEGER,"
@@ -63,11 +65,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                String title = cursor.getString(0);
-                String genre = cursor.getString(1);
-                int year = cursor.getInt(2);
-                String ratings = cursor.getString(3);
-                Movie movie = new Movie(title, genre, year, ratings);
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String genre = cursor.getString(2);
+                int year = cursor.getInt(3);
+                String ratings = cursor.getString(4);
+                Movie movie = new Movie(id, title, genre, year, ratings);
                 songs.add(movie);
             } while (cursor.moveToNext());
         }
@@ -90,11 +93,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                String title = cursor.getString(0);
-                String genre = cursor.getString(1);
-                int year = cursor.getInt(2);
-                String ratings = cursor.getString(3);
-                Movie movie = new Movie(title, genre, year, ratings);
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String genre = cursor.getString(2);
+                int year = cursor.getInt(3);
+                String ratings = cursor.getString(4);
+                Movie movie = new Movie(id, title, genre, year, ratings);
                 songs.add(movie);
             } while (cursor.moveToNext());
         }
