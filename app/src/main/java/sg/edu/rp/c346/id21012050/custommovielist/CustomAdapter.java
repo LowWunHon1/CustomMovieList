@@ -38,7 +38,7 @@ public class CustomAdapter extends ArrayAdapter {
 
         Movie currentItem = movieList.get(position);
         tvMovieTitle.setText(currentItem.getTitle());
-        tvMovieGenre.setText("+" + currentItem.getGenre());
+        tvMovieGenre.setText(currentItem.getGenre());
         tvReleaseYear.setText(currentItem.getYear() + "");
 
         if (currentItem.getRating() == "G") {
