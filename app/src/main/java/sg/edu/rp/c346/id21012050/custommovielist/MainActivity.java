@@ -2,11 +2,16 @@ package sg.edu.rp.c346.id21012050.custommovielist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etTitle, etGenre, etYear;
     Spinner spnMovies;
     ArrayList<Movie> alMovies;
-    CustomAdapter caMovies;
+    ArrayAdapter<Movie> aaMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +36,16 @@ public class MainActivity extends AppCompatActivity {
         spnMovies = findViewById(R.id.spinnerMovies);
 
         alMovies = new ArrayList<>();
+        aaMovies = new ArrayAdapter<Movie>(this,
+                android.R.layout.simple_list_item_1, alMovies);
 
-        caMovies = new CustomAdapter(this, R.layout.row, alMovies);
+        btnShowList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ShowListActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 }
