@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,15 +40,18 @@ public class MainActivity extends AppCompatActivity {
         aaMovies = new ArrayAdapter<Movie>(this,
                 android.R.layout.simple_list_item_1, alMovies);
 
+
+
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View view) {
                 String title = etTitle.getText().toString();
                 String genre = etGenre.getText().toString();
-                String year = etYear.getText().toString();
+                int year = Integer.parseInt(etYear.getText().toString());
+                String rating = spnMovies.getSelectedItem().toString();
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long inserted_id = dbh.insertMovie(title, genre, year);
+                long inserted_id = dbh.insertMovie(title, genre, year, rating);
 
                 if (inserted_id != -1){
                     alMovies.clear();
