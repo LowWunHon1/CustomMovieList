@@ -2,8 +2,10 @@ package sg.edu.rp.c346.id21012050.custommovielist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ public class ModifyActivity extends AppCompatActivity {
     EditText etID, etModTitle, etModGenre, etModYear;
     Spinner spnRatings;
     Button btnUpdate, btnDelete, btnCancel;
+    Movie data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,35 @@ public class ModifyActivity extends AppCompatActivity {
         etModTitle.setText(currentMovie.getTitle());
         etModGenre.setText(currentMovie.getGenre());
         etModYear.setText(currentMovie.getYear()+"");
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBHelper dbh = new DBHelper(ModifyActivity.this);
+                data.setGenre(etModGenre.getText().toString());
+                data.setTitle(etModTitle.getText().toString());
+                data.setYear(Integer.parseInt(etModYear.getText().toString()+""));
+                dbh.updateMovies(data);
+                dbh.close();
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBHelper dbh = new DBHelper(ModifyActivity.this);
+                dbh.deleteMovies(data.getId());
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ModifyActivity.this,
+                        ShowListActivity.class);
+                startActivity(i);
+            }
+        });
 
 
     }
