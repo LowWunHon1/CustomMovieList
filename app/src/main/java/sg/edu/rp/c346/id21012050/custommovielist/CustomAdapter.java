@@ -41,17 +41,17 @@ public class CustomAdapter extends ArrayAdapter {
         tvMovieGenre.setText(currentItem.getGenre());
         tvReleaseYear.setText(currentItem.getYear() + "");
 
-        if (currentItem.getRating() == "G") {
+        if (currentItem.getRating().equals("G")) {
             ivMovieRatings.setImageResource(R.drawable.rating_g);
-        } else if (currentItem.getRating() == "PG") {
+        } else if (currentItem.getRating().equals("PG")) {
             ivMovieRatings.setImageResource(R.drawable.rating_pg);
-        } else if (currentItem.getRating() == "PG13") {
+        } else if (currentItem.getRating().equals("PG13")) {
             ivMovieRatings.setImageResource(R.drawable.rating_pg13);
-        } else if (currentItem.getRating() == "NC16") {
+        } else if (currentItem.getRating().equals("NC16")) {
             ivMovieRatings.setImageResource(R.drawable.rating_nc16);
-        } else if (currentItem.getRating() == "M18") {
+        } else if (currentItem.getRating().equals("M18")) {
             ivMovieRatings.setImageResource(R.drawable.rating_m18);
-        } else {
+        } else if (currentItem.getRating().equals("R21")) {
             ivMovieRatings.setImageResource(R.drawable.rating_r21);
         }
 
