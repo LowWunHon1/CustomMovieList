@@ -8,15 +8,12 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 
 public class ModifyActivity extends AppCompatActivity {
 
     EditText etID, etModTitle, etModGenre, etModYear;
     Spinner spnRatings;
     Button btnUpdate, btnDelete, btnCancel;
-    ArrayList spnItems;
-    int ratingIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +29,6 @@ public class ModifyActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.buttonDelete);
         btnCancel = findViewById(R.id.btnCancel);
 
-        spnItems.add("G");
-        spnItems.add("PG");
-        spnItems.add("PG13");
-        spnItems.add("NC16");
-        spnItems.add("M18");
-        spnItems.add("R21");
-
-
         Intent i = getIntent();
         final Movie currentMovie = (Movie) i.getSerializableExtra("data");
 
@@ -47,12 +36,6 @@ public class ModifyActivity extends AppCompatActivity {
         etModTitle.setText(currentMovie.getTitle());
         etModGenre.setText(currentMovie.getGenre());
         etModYear.setText(currentMovie.getYear()+"");
-        for (int x = 0;x < spnItems.size();x++){
-            if (currentMovie.getRating() == spnItems.get(x)){
-                ratingIndex = x;
-            }
-        }
-        spnRatings.setSelection(ratingIndex);
 
 
     }
