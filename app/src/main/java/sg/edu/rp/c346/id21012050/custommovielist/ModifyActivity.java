@@ -33,12 +33,26 @@ public class ModifyActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
 
         Intent i = getIntent();
-        final Movie currentMovie = (Movie) i.getSerializableExtra("data");
+        data = (Movie) i.getSerializableExtra("data");
 
-        etID.setText(currentMovie.getId()+"");
-        etModTitle.setText(currentMovie.getTitle());
-        etModGenre.setText(currentMovie.getGenre());
-        etModYear.setText(currentMovie.getYear()+"");
+        etID.setText(data.getId()+"");
+        etModTitle.setText(data.getTitle());
+        etModGenre.setText(data.getGenre());
+        etModYear.setText(data.getYear()+"");
+
+        if(data.getRating().equals("G")) {
+            spnRatings.setSelection(0);
+        } else if (data.getRating().equals("PG")) {
+            spnRatings.setSelection(1);
+        } else if (data.getRating().equals("PG13")) {
+            spnRatings.setSelection(2);
+        } else if (data.getRating().equals("NC16")) {
+            spnRatings.setSelection(3);
+        } else if (data.getRating().equals("M18")) {
+            spnRatings.setSelection(4);
+        } else if (data.getRating().equals("R21")) {
+            spnRatings.setSelection(5);
+        }
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +61,7 @@ public class ModifyActivity extends AppCompatActivity {
                 data.setGenre(etModGenre.getText().toString());
                 data.setTitle(etModTitle.getText().toString());
                 data.setYear(Integer.parseInt(etModYear.getText().toString()+""));
+                data.setRating(spnRatings.getSelectedItem().toString());
                 dbh.updateMovies(data);
                 dbh.close();
             }
