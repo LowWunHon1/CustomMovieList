@@ -58,7 +58,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerMovies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/spinnerMovieRatings"/>
