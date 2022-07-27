@@ -55,11 +55,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Movie> getAllMovies() {
-        ArrayList<Movie> songs = new ArrayList<>();
+        ArrayList<Movie> movies = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns= {COLUMN_TITLE, COLUMN_GENRE, COLUMN_YEAR, COLUMN_RATING};
+        String[] columns= {COLUMN_ID, COLUMN_TITLE, COLUMN_GENRE, COLUMN_YEAR, COLUMN_RATING};
         Cursor cursor = db.query(TABLE_MOVIES, columns, null, null,
                 null, null, null, null);
 
@@ -71,12 +71,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 int year = cursor.getInt(3);
                 String ratings = cursor.getString(4);
                 Movie movie = new Movie(id, title, genre, year, ratings);
-                songs.add(movie);
+                movies.add(movie);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return songs;
+        return movies;
     }
 
     public ArrayList<Movie> getAllPG13Movies() {
@@ -84,7 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns= {COLUMN_TITLE, COLUMN_GENRE, COLUMN_YEAR, COLUMN_RATING};
+        String[] columns= {COLUMN_ID, COLUMN_TITLE, COLUMN_GENRE, COLUMN_YEAR, COLUMN_RATING};
 
         String[] strAr1 = new String[] {"PG13"};
 

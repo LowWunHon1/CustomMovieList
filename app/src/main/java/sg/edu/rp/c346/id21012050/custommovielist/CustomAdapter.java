@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,11 +34,26 @@ public class CustomAdapter extends ArrayAdapter {
         TextView tvMovieTitle = rowView.findViewById(R.id.textViewMovieTitle);
         TextView tvMovieGenre = rowView.findViewById(R.id.textViewMovieGenre);
         TextView tvReleaseYear = rowView.findViewById(R.id.textViewReleaseYear);
+        ImageView ivMovieRatings = rowView.findViewById(R.id.imageViewRating);
 
         Movie currentItem = movieList.get(position);
         tvMovieTitle.setText(currentItem.getTitle());
         tvMovieGenre.setText("+" + currentItem.getGenre());
         tvReleaseYear.setText(currentItem.getYear() + "");
+
+        if (currentItem.getRating() == "G") {
+            ivMovieRatings.setImageResource(R.drawable.rating_g);
+        } else if (currentItem.getRating() == "PG") {
+            ivMovieRatings.setImageResource(R.drawable.rating_pg);
+        } else if (currentItem.getRating() == "PG13") {
+            ivMovieRatings.setImageResource(R.drawable.rating_pg13);
+        } else if (currentItem.getRating() == "NC16") {
+            ivMovieRatings.setImageResource(R.drawable.rating_nc16);
+        } else if (currentItem.getRating() == "M18") {
+            ivMovieRatings.setImageResource(R.drawable.rating_m18);
+        } else {
+            ivMovieRatings.setImageResource(R.drawable.rating_r21);
+        }
 
         return rowView;
 
