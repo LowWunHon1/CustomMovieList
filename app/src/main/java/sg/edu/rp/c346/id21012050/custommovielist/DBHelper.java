@@ -82,7 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Movie> getAllPG13Movies() {
-        ArrayList<Movie> songs = new ArrayList<>();
+        ArrayList<Movie> movies = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -101,12 +101,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 int year = cursor.getInt(3);
                 String ratings = cursor.getString(4);
                 Movie movie = new Movie(id, title, genre, year, ratings);
-                songs.add(movie);
+                movies.add(movie);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return songs;
+        return movies;
     }
 
     public int updateMovies(Movie data) {
@@ -130,5 +130,31 @@ public class DBHelper extends SQLiteOpenHelper {
         int result = db.delete(TABLE_MOVIES, condition, args);
         db.close();
         return result;
+    }
+
+    public ArrayList<Movie> getAllSongsByRating(String movieRating) {
+        ArrayList<Movie> notes = new ArrayList<Movie>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns= {COLUMN_ID, COLUMN_TITLE, COLUMN_GENRE, COLUMN_YEAR, COLUMN_RATING};
+        String condition = COLUMN_RATING + " Like ?";
+        String[] args = { "%" + movieRating  + "%"};
+        Cursor cursor = db.query(TABLE_MOVIES, columns, condition, args,
+                null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String genre = cursor.getString(2);
+                int year = cursor.getInt(3);
+                String ratings = cursor.getString(4);
+                Movie movie = new Movie(id, title, genre, year, ratings);
+                notes.add(movie);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return notes;
     }
 }

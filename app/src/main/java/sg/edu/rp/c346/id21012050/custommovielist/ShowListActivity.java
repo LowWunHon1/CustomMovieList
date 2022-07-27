@@ -9,12 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
 public class ShowListActivity extends AppCompatActivity {
 
     Button btnPG13;
+    Spinner spnMovieRatings;
     ListView lvMovies;
     ArrayList<Movie> alMovies;
     ArrayAdapter<Movie> aaMovies;
@@ -27,6 +29,7 @@ public class ShowListActivity extends AppCompatActivity {
 
         btnPG13 = findViewById(R.id.buttonPG13);
         lvMovies = findViewById(R.id.listViewMovies);
+        spnMovieRatings = findViewById(R.id.spinnerMovieRatings);
 
         alMovies = new ArrayList<Movie>();
 
@@ -44,6 +47,41 @@ public class ShowListActivity extends AppCompatActivity {
                 Movie data = alMovies.get(position);
                 i.putExtra("data", data);
                 startActivity(i);
+            }
+        });
+
+        spnMovieRatings.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                DBHelper dbh = new DBHelper(ShowListActivity.this);
+                String movieRating = spnMovieRatings.getSelectedItem().toString();
+                alMovies.clear();
+                alMovies.addAll(dbh.getAllSongsByRating(movieRating));
+                caMovies.notifyDataSetChanged();
+
+                ArrayList<String> alYear = new ArrayList<>();
+
+                for (int a = 0; a < alMovies.size(); a++) {
+                    for (int x = 0; x < alYear.size(); x++) {
+                        String yearItem = alMovies.get(x).getRating() + "";
+                        if (alYear.get(x) != yearItem) {
+                            alYear.add(alMovies.get(x).getYear() + "");
+                        }
+                    }
+                }
+
+                alMovies.clear();
+                alMovies.addAll(dbh.getAllSongsByRating(movieRating));
+                caMovies.notifyDataSetChanged();
+
+                switch (i) {
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
