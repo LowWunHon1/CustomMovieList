@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,7 +76,12 @@ public class ModifyActivity extends AppCompatActivity {
                         data.setTitle(etModTitle.getText().toString());
                         data.setYear(Integer.parseInt(etModYear.getText().toString()+""));
                         data.setRating(spnRatings.getSelectedItem().toString());
-                        dbh.updateMovies(data);
+                        if (data.getYear() >= 1900) {
+                            dbh.updateMovies(data);
+                        } else {
+                            Toast.makeText(ModifyActivity.this, "Update unsuccessful",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                         dbh.close();
                         Intent i2 = new Intent(ModifyActivity.this,
                                 ShowListActivity.class);

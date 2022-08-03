@@ -51,13 +51,19 @@ public class MainActivity extends AppCompatActivity {
                 int year = Integer.parseInt(etYear.getText().toString());
                 String rating = spnMovies.getSelectedItem().toString();
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long inserted_id = dbh.insertMovie(title, genre, year, rating);
 
-                if (inserted_id != -1){
-                    alMovies.clear();
-                    alMovies.addAll(dbh.getAllMovies());
-                    aaMovies.notifyDataSetChanged();
-                    Toast.makeText(MainActivity.this, "Insert successful",
+                if (year >= 1900) {
+                    long inserted_id = dbh.insertMovie(title, genre, year, rating);
+
+                    if (inserted_id != -1) {
+                        alMovies.clear();
+                        alMovies.addAll(dbh.getAllMovies());
+                        aaMovies.notifyDataSetChanged();
+                        Toast.makeText(MainActivity.this, "Insert successful",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Insert unsuccessful",
                             Toast.LENGTH_SHORT).show();
                 }
             }
