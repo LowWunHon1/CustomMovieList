@@ -64,7 +64,7 @@ public class ModifyActivity extends AppCompatActivity {
 
                 AlertDialog.Builder myBuilder = new AlertDialog.Builder(ModifyActivity.this);
                 myBuilder.setTitle("Danger");
-                myBuilder.setMessage("Are you sure you want to edit this movie?");
+                myBuilder.setMessage("Are you sure you want to edit the movie " + data.getTitle() + "?");
                 myBuilder.setCancelable(false);
 
                 myBuilder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
@@ -96,7 +96,7 @@ public class ModifyActivity extends AppCompatActivity {
 
                 AlertDialog.Builder myBuilder = new AlertDialog.Builder(ModifyActivity.this);
                 myBuilder.setTitle("Danger");
-                myBuilder.setMessage("Are you sure you want to delete this movie?");
+                myBuilder.setMessage("Are you sure you want to delete the movie " + data.getTitle() + "?");
                 myBuilder.setCancelable(false);
 
                 myBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
