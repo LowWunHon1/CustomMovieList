@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/buttonPG13"
+        android:id="@+id/buttonAllMovies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show all pg-13 movies" />
+        android:text="Show all movies" />
 
     <Spinner
         android:id="@+id/spinnerMovieRatings"

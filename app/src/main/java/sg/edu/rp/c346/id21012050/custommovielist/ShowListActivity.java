@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ShowListActivity extends AppCompatActivity {
 
-    Button btnPG13;
+    Button btnALlMovies;
     Spinner spnMovieRatings;
     ListView lvMovies;
     ArrayList<Movie> alMovies;
@@ -27,7 +27,7 @@ public class ShowListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_list);
 
-        btnPG13 = findViewById(R.id.buttonPG13);
+        btnALlMovies = findViewById(R.id.buttonAllMovies);
         lvMovies = findViewById(R.id.listViewMovies);
         spnMovieRatings = findViewById(R.id.spinnerMovieRatings);
 
@@ -85,13 +85,13 @@ public class ShowListActivity extends AppCompatActivity {
             }
         });
 
-        btnPG13.setOnClickListener(new View.OnClickListener() {
+        btnALlMovies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DBHelper dbh = new DBHelper(ShowListActivity.this);
 
                 alMovies.clear();
-                alMovies.addAll(dbh.getAllPG13Movies());
+                alMovies.addAll(dbh.getAllMovies());
                 caMovies.notifyDataSetChanged();
             }
         });
